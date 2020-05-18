@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="stil.css">
+</head>
+<body>
+    <div id="container">
+
+    </div>
+
+    <script>
+        var people=[
+  {
+    "id": 1,
+    "firstName": "Paul",
+    "surname": "Crowe",
+    "age": 28,
+    "gender": "male",
+    "friends": [
+      2
+    ]
+  },
+  {
+    "id": 2,
+    "firstName": "Rob",
+    "surname": "Fitz",
+    "age": 23,
+    "gender": "male",
+    "friends": [
+      1,
+      3
+    ]
+  },
+  {
+    "id": 3,
+    "firstName": "Ben",
+    "surname": "O'Carolan",
+    "age": null,
+    "gender": "male",
+    "friends": [
+      2,
+      4,
+      5,
+      7
+    ]
+  },
+  {
+    "id": 4,
+    "firstName": "Victor",
+    "surname": "",
+    "age": 28,
+    "gender": "male",
+    "friends": [
+      3
+    ]
+  },
+  {
+    "id": 5,
+    "firstName": "Peter",
+    "surname": "Mac",
+    "age": 29,
+    "gender": "male",
+    "friends": [
+      3,
+      6,
+      11,
+      10,
+      7
+    ]
+  },
+  {
+    "id": 6,
+    "firstName": "John",
+    "surname": "Barry",
+    "age": 18,
+    "gender": "male",
+    "friends": [
+      5
+    ]
+  },
+  {
+    "id": 7,
+    "firstName": "Sarah",
+    "surname": "Lane",
+    "age": 30,
+    "gender": "female",
+    "friends": [
+      3,
+      5,
+      20,
+      12,
+      8
+    ]
+  },
+  {
+    "id": 8,
+    "firstName": "Susan",
+    "surname": "Downe",
+    "age": 28,
+    "gender": "female",
+    "friends": [
+      7
+    ]
+  },
+  {
+    "id": 9,
+    "firstName": "Jack",
+    "surname": "Stam",
+    "age": 28,
+    "gender": "male",
+    "friends": [
+      12
+    ]
+  },
+  {
+    "id": 10,
+    "firstName": "Amy",
+    "surname": "Lane",
+    "age": 24,
+    "gender": "female",
+    "friends": [
+      5,
+      11
+    ]
+  },
+  {
+    "id": 11,
+    "firstName": "Sandra",
+    "surname": "Phelan",
+    "age": 28,
+    "gender": "female",
+    "friends": [
+      5,
+      10,
+      19,
+      20
+    ]
+  },
+  {
+    "id": 12,
+    "firstName": "Laura",
+    "surname": "Murphy",
+    "age": 33,
+    "gender": "female",
+    "friends": [
+      7,
+      9,
+      13,
+      20
+    ]
+  },
+  {
+    "id": 13,
+    "firstName": "Lisa",
+    "surname": "Daly",
+    "age": 28,
+    "gender": "female",
+    "friends": [
+      12,
+      14,
+      20
+    ]
+  },
+  {
+    "id": 14,
+    "firstName": "Mark",
+    "surname": "Johnson",
+    "age": 28,
+    "gender": "male",
+    "friends": [
+      13,
+      15
+    ]
+  },
+  {
+    "id": 15,
+    "firstName": "Seamus",
+    "surname": "Crowe",
+    "age": 24,
+    "gender": "male",
+    "friends": [
+      14
+    ]
+  },
+  {
+    "id": 16,
+    "firstName": "Daren",
+    "surname": "Slater",
+    "age": 28,
+    "gender": "male",
+    "friends": [
+      18,
+      20
+    ]
+  },
+  {
+    "id": 17,
+    "firstName": "Dara",
+    "surname": "Zoltan",
+    "age": 48,
+    "gender": "male",
+    "friends": [
+      18,
+      20
+    ]
+  },
+  {
+    "id": 18,
+    "firstName": "Marie",
+    "surname": "D",
+    "age": 28,
+    "gender": "female",
+    "friends": [
+      17
+    ]
+  },
+  {
+    "id": 19,
+    "firstName": "Catriona",
+    "surname": "Long",
+    "age": 28,
+    "gender": "female",
+    "friends": [
+      11,
+      20
+    ]
+  },
+  {
+    "id": 20,
+    "firstName": "Katy",
+    "surname": "Couch",
+    "age": 28,
+    "gender": "female",
+    "friends": [
+      7,
+      11,
+      12,
+      13,
+      16,
+      17,
+      19
+    ]
+  }
+];
+
+for(let i=0;i<people.length;i++){
+    let kon=document.getElementById("container");
+    kon.innerHTML+=`<div><button class="dugme" onclick="prikaz(this)" value="${people[i].id}">${people[i].firstName}</button></div>`
+}
+
+function prikaz(dugme){
+    let chosenPerson;
+    let chosenPersonID;
+    let dirFriends=[];
+    let dirFriendsID=[];
+    let fOfFriendsID=[];
+    let fofFriends=[];
+    let sugFriends=[];
+    let sugFriendsID=[];
+    let br;
+    console.log(dugme.value);
+    for(let person of people){
+        if(person.id==dugme.value){
+            //console.log(person.firstName);
+            chosenPerson=person.firstName;
+            chosenPersonID=person.id;
+            // Direct Friends
+            for(let friend of person.friends){
+               //console.log(friend); 
+               for(let j=0;j<people.length;j++){
+                   if(friend==people[j].id){
+                       dirFriends.push(people[j].firstName+" "+people[j].surname) 
+                       dirFriendsID.push(people[j].id);
+                   }
+               }    
+            }
+
+            // Friends of Friends  
+            for(let friend of dirFriendsID){
+                for(let i=0;i<people.length;i++){
+                    if(people[i].id==friend){
+                        for(let fof of people[i].friends){
+                            if(dirFriendsID.includes(fof) || fof==chosenPersonID || fOfFriendsID.includes(fof)){
+
+                            }else
+                            {
+                                fOfFriendsID.push(fof);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    
+    }
+    //writing names of Friends of friends
+    for(let friend of fOfFriendsID){
+        for(let i=0;i<people.length;i++){
+            if(people[i].id==friend){
+                fofFriends.push(people[i].firstName+" "+people[i].surname);
+            }
+        }
+    }
+    //Suggested friends
+    for(let person of people){
+      if(!dirFriendsID.includes(person.id) && person.id!=chosenPersonID){
+        for(friend of person.friends){
+          if(dirFriendsID.includes(friend)){
+            br++;
+          }
+        }
+      }
+      if(br>=2){
+        sugFriendsID.push(person.id);
+        br=0;
+      }else{
+        br=0;
+      }
+    }
+    //Writing names of suggested friends
+    for(let friend of sugFriendsID){
+      for(let i=0;i<people.length;i++){
+        if(people[i].id==friend){
+          sugFriends.push(people[i].firstName+" "+people[i].surname);
+        }
+      }
+    }
+
+    console.log(sugFriends);
+    console.log(sugFriendsID);
+    console.log(fOfFriendsID);
+    console.log(fofFriends);
+    console.log(dirFriendsID);  
+    console.log(dirFriends);
+    alert("Chosen Perso: "+chosenPerson+"\n\n"+"Direct Friends:"+dirFriends+"\n\n"+"Friends of Friends: "+fofFriends+"\n\n"+"Suggested friends: "+sugFriends);
+}
+
+
+    </script>
+</body>
+</html>
